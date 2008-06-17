@@ -1,0 +1,81 @@
+###################################################
+
+THE BASECAMP API PHP WRAPPER
+
+coded by Aaron Quint
+	--> http://www.quirkey.com/blog/
+based on basecamp.rb by 37signals
+	--> http://www.37signals.com
+
+####################################################
+
+
+INTRODUCTION
+
+The Basecamp API is an XML REST interface for interacting with 
+37 signals Basecamp Project management software.
+The PHP wrapper is an implementation of the API as a PHP 4 class.
+
+API documentation:
+http://www.basecamphq.com/api
+
+REQUIREMENTS
+
+basecamp.php requires a couple of classes from PEAR. Specifically
+
+HTTP_Request
+XML_Serializer
+
+which can be found (with documentation) at http://pear.php.net
+These are really easy to install (if you have access to a command line)
+
+	$ sudo pear install HTTP_Request
+	$ sudo pear install XML_Serializer-0.18.0
+
+The version number is necessary for XML_Serializer because its not yet a stable release.
+If you get any messages while trying to install like 'Dependencies failed', just do
+
+	$ sudo pear upgrade _Missing_Package_
+
+!!! VERY IMPORTANT !!!
+In order for this to work you need to enable API access on your Basecamp account.
+The owner of the account has to do this in Basecamp > Settings.
+
+USAGE
+
+Its real easy to get stuff and send stuff to your Basecamp account.
+First, initialize a Basecamp object with your credentials:
+
+	$session = new Basecamp('myusername','mypassword','http://mybasecamp.baseurl.com');
+
+Then its just a matter of calling the api function on the session. 
+(see the internal documentation for more info).
+
+	// Get all your projects
+
+	// initialize 
+	$session = new Basecamp('myusername','mypassword','http://mybasecamp.baseurl.com');
+	// get the projects
+	$projects = $session->projects();
+
+	// get all the lists from your project
+	$lists = $session->lists($projects[0]->id);
+
+Because everything returned is an object (or an array of objects) its easy to arrange projects:
+
+	$my_project = $projects[0];
+	$my_project->messages = $session->message_archive($my_project->id);
+
+You should reference the API docs (http://www.basecamphq.com/api) for all the details of the 
+different Basecamp object types. Or you can always use the magical print_r function:
+	
+	print_r($projects);
+
+
+
+Please send any comments, correction, bugs to aq at audiokio dot com.
+If you like this script - subscribe to my blog:
+http://www.quirkey.com/blog/
+There are bunch of other projects in the works . . . 
+
+
