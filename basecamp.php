@@ -244,7 +244,7 @@ class Basecamp {
 	
 	// Creates a single or multiple milestone(s). 
 	function create_milestones($project_id,$milestones) {
-		return $this->hook("/projects/{$project_id}/milestones/create","milestone",array("milestone" => $milestone));
+		return $this->hook("/projects/{$project_id}/milestones/create","milestone",array("milestone" => $milestones));
 	}
 	
 	// Deletes the given milestone from the project.
