@@ -97,7 +97,8 @@ class Basecamp {
 	
 	// Delete the message with the given id.
 	function delete_message($message_id) {
-		return $this->hook("/msg/delete/{$message_id}","post");
+		$request['post'] = 'delete';
+		return $this->hook("/msg/delete/{$message_id}","post", $request);
 	}
 	
 	// This will return information about the referenced message. 
